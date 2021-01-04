@@ -4,6 +4,8 @@ namespace ShibuyaKosuke\LaravelYasumi;
 
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Carbon;
+use ReflectionException;
+use Yasumi\Exception\MissingTranslationException;
 use Yasumi\Yasumi;
 
 /**
@@ -41,8 +43,8 @@ class Holiday
     /**
      * @param Carbon $carbon
      * @return void
-     * @throws \Yasumi\Exception\MissingTranslationException
-     * @throws \ReflectionException
+     * @throws MissingTranslationException
+     * @throws ReflectionException
      */
     public function getHolidays(Carbon $carbon)
     {
@@ -56,9 +58,9 @@ class Holiday
 
     /**
      * @param Carbon $carbon
-     * @return mixed|null
-     * @throws \ReflectionException
-     * @throws \Yasumi\Exception\MissingTranslationException
+     * @return mixed
+     * @throws ReflectionException
+     * @throws MissingTranslationException
      */
     public function get(Carbon $carbon)
     {
@@ -68,13 +70,25 @@ class Holiday
 
     /**
      * @param Carbon $carbon
-     * @return boolean
-     * @throws \ReflectionException
-     * @throws \Yasumi\Exception\MissingTranslationException
+     * @return bool
+     * @throws ReflectionException
+     * @throws MissingTranslationException
      */
-    public function isHoliday(Carbon $carbon)
+    public function isHoliday(Carbon $carbon): bool
     {
         $this->getHolidays($carbon);
         return isset($this->holidays[$carbon->year], $this->holidays[$carbon->year][$carbon->format('Y-m-d')]);
+    }
+
+    /**
+     * @param Carbon $carbon
+     * @return bool
+     * @throws ReflectionException
+     * @throws MissingTranslationException
+     */
+    public function isDayBeforeHoliday(Carbon $carbon): bool
+    {
+        $day = $carbon->clone()->addDay();
+        return $this->isHoliday($day);
     }
 }
