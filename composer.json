@@ -18,6 +18,11 @@
             "ShibuyaKosuke\\LaravelYasumi\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "ShibuyaKosuke\\LaravelYasumi\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
@@ -27,5 +32,11 @@
                 "Holiday": "ShibuyaKosuke\\LaravelYasumi\\Facades\\Holiday"
             }
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
     }
 }
