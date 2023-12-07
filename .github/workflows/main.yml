@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [7.4,8.0,8.1]
+        php: [8.1, 8.2]
         dependency-version: [prefer-stable]
 
     name: PHP ${{ matrix.php }} - ${{ matrix.dependency-version }}
@@ -25,3 +25,6 @@ jobs:
 
       - name: Install dependencies
         run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+
+      - name: Run tests
+        run: composer test
