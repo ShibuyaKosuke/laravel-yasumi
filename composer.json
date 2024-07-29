@@ -11,7 +11,7 @@
     ],
     "require": {
         "azuyalabs/yasumi": "^2.0",
-        "laravel/framework": "^8.0 | ^9.0 | ^10.0"
+        "laravel/framework": "^8.0 | ^9.0 | ^10.0 | ^11.0"
     },
     "autoload": {
         "psr-4": {
